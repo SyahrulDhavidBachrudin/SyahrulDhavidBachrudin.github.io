@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8" />
   <title>Portofolio | Syahrul Dhavid Bachrudin</title>
@@ -10,95 +11,168 @@
 
 <body class="bg-gray-950 text-gray-200">
 
-<!-- HERO -->
-<section class="min-h-screen flex items-center justify-center">
-  <div class="text-center px-6">
-    <h1 class="text-4xl md:text-5xl font-bold">
-      Syahrul Dhavid Bachrudin
-    </h1>
-    <p class="mt-4 text-gray-400">
-      Full Stack Developer • Flask • React • Tailwind • Laravel 
-    </p>
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="min-h-screen flex items-center">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
 
-<!-- REPOS -->
-<section class="px-6 py-20 bg-gray-900">
-  <div class="max-w-6xl mx-auto">
-    <h2 class="text-3xl font-bold mb-10 text-center">
-      GitHub Projects
-    </h2>
+      <!-- TEXT -->
+      <div class="space-y-6 animate-fadeInLeft">
 
-    <div id="repoList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-  </div>
-</section>
+        <h1 class="text-5xl md:text-6xl font-bold leading-tight">
+          Syahrul Dhavid <br> Bachrudin
+        </h1>
 
-<footer class="text-center py-6 text-gray-500 text-sm">
-  Auto-generated from GitHub API
-</footer>
+        <p class="text-gray-400 text-lg">
+          Full Stack Developer • Flask • React • Tailwind • Laravel
+        </p>
 
-<script src="script.js"></script>
+        <p class="text-gray-500 max-w-lg">
+          Saya membangun aplikasi web modern menggunakan Python, Flask,
+          React, dan Laravel. Fokus pada sistem yang scalable, cepat,
+          dan user-friendly.
+        </p>
+
+        <div class="flex gap-4 pt-4">
+          <a href="https://github.com/SyahrulDhavidBachrudin" target="_blank"
+            class="px-6 py-3 bg-white text-black rounded-lg font-medium hover:scale-105 transition">
+            GitHub
+          </a>
+
+          <a href="https://github.com/SyahrulDhavidBachrudin/SyahrulDhavidBachrudin.github.io/blob/main/CV%20Syahrul%20Dhavid%20Bachrudin%201.pdf"
+            class="px-6 py-3 border border-gray-600 rounded-lg hover:bg-gray-800 transition">
+            Download CV
+          </a>
+        </div>
+
+      </div>
+
+
+      <!-- PHOTO -->
+      <div class="flex justify-center animate-fadeInRight">
+
+        <div class="relative">
+
+          <!-- GLOW -->
+          <div class="absolute inset-0 blur-3xl opacity-40 bg-blue-500 rounded-full animate-pulse"></div>
+
+          <!-- IMAGE -->
+          <img src="assets/image.png"
+            class="relative w-80 md:w-78 rounded-full border-4 border-gray-800 shadow-2xl animate-float">
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- REPOS -->
+  <section class="px-6 py-20 bg-gray-900">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-3xl font-bold mb-10 text-center">
+        GitHub Projects
+      </h2>
+
+      <div id="repoList" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </div>
+  </section>
+
+  <footer class="text-center py-6 text-gray-500 text-sm">
+    Syahrul Dhavid Bachrudin Origin
+  </footer>
+
+  <script src="script.js"></script>
 </body>
+
 </html>
 <script>
-    const username = "SyahrulDhavidBachrudin";
-const repoList = document.getElementById("repoList");
+  const username = "SyahrulDhavidBachrudin";
+  const repoList = document.getElementById("repoList");
 
-/**
- * MAP SCREENSHOT PROJECT
- * key = nama repo
- * value = path gambar
- */
-const screenshots = {
-  "aplikasi-kasir-flask": "assets/kasir-flask.png",
-  "dashboard-undangan": "assets/undangan-dashboard.png",
-};
+  const hiddenRepos = [
+    "syahruldhavidbachrudin",
+    "SyahrulDhavidBachrudin.github.io"
+  ];
 
-// default placeholder
-const placeholder = "assets/placeholder.png";
+  const projectData = {
 
-fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
-  .then(res => res.json())
-  .then(repos => {
-    repos.forEach(repo => {
-      if (repo.fork) return;
+    "project-gis": {
+      image: "assets/Gis.png",
+      description: "Pemetaan GIS untuk analisis wilayah dan data penyakit DBD menggunakan clustering."
+    },
 
-      const image =
-        screenshots[repo.name] || placeholder;
+    "DBD": {
+      image: "assets/DBD.png",
+      description: "Sistem analisis penyebaran DBD menggunakan metode K-Means dan visualisasi GIS."
+    },
 
-      repoList.innerHTML += `
+    "undangan": {
+      image: "assets/Undangan.png",
+      description: "Dashboard undangan digital dengan sistem RSVP dan manajemen tamu."
+    },
+
+    "KasirPercetakan": {
+      image: "assets/Percetakan.png",
+      description: "Sistem manajemen percetakan untuk mengelola pesanan dan produksi."
+    },
+
+    "TemplateBaju": {
+      image: "assets/Baju.png",
+      description: "Website desain template baju untuk kebutuhan clothing atau merchandise."
+    },
+
+    "chatbotzeroshoot": {
+      image: "assets/Zero.png",
+      description: "Implementasi Zero-Shot Learning menggunakan LLM untuk prediksi solusi dari artikel ilmiah."
+    }
+
+  };
+
+  const placeholder = "assets/placeholder.png";
+
+  fetch(`https://api.github.com/users/${username}/repos?sort=updated`)
+    .then(res => res.json())
+    .then(repos => {
+
+      repos.forEach(repo => {
+
+        // skip repo fork
+        if (repo.fork) return;
+
+        // skip repo yang disembunyikan
+        if (hiddenRepos.includes(repo.name)) return;
+
+        const data = projectData[repo.name] || {};
+
+        const image = data.image || placeholder;
+        const description =
+          data.description || repo.description || "No description";
+
+        repoList.innerHTML += `
         <div class="bg-gray-900 border border-gray-800 rounded-xl overflow-hidden hover:scale-[1.02] transition">
 
-          <img src="${image}"
-               class="w-full h-48 object-cover"
-               alt="${repo.name}">
+          <img src="${image}" class="w-full h-48 object-cover">
 
           <div class="p-5">
-            <h3 class="text-xl font-semibold">
-              ${repo.name}
-            </h3>
+            <h3 class="text-xl font-semibold">${repo.name}</h3>
 
-            <p class="text-gray-400 text-sm mt-2">
-              ${repo.description ?? "No description"}
-            </p>
+            <p class="text-gray-400 text-sm mt-2">${description}</p>
 
             <div class="flex justify-between items-center mt-4 text-sm">
-              <span class="text-gray-500">
-                ${repo.language ?? "-"}
-              </span>
+              <span class="text-gray-500">${repo.language ?? "-"}</span>
 
-              <a href="${repo.html_url}"
-                 target="_blank"
-                 class="text-white underline">
+              <a href="${repo.html_url}" target="_blank" class="underline">
                 GitHub →
               </a>
             </div>
           </div>
+
         </div>
-      `;
+        `;
+      });
+
+    })
+    .catch(() => {
+      repoList.innerHTML = "Gagal memuat repo.";
     });
-  })
-  .catch(() => {
-    repoList.innerHTML = "Gagal memuat repo.";
-  });
 </script>
